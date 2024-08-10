@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <h1 userId="<%= user.username %>" id="sender">Welcome, <%= user.username %>!</h1>
+    <div id="dashboard">
+        <button id="create-group">Create Group</button>
+        <button id="join-group">Join Group</button>
+        <div id="online-users">
+            <h2>Online Users</h2>
+            <ul>
+                <% users.forEach(user=> { %>
+                    <li class="<%= user.online ? 'online' : 'offline' %>" data-username="<%= user.username %>">
+                        <%= user.username %>
+                    </li>
+                    <% }); %>
+            </ul>
+        </div>
+        <button id="logout">Logout</button>
+    </div>
+    <div id="chat-container">
+        <select id="receiver">
+            <% users.forEach(user=> { %>
+                <option value="<%= user.username %>">
+                    <%= user.username %>
+                </option>
+                <% }); %>
+        </select>
+        <div id="message-area">
+            <ul id="messages"></ul>
+            <input type="text" id="message" placeholder="Type a message">
+            <button id="send">Send</button>
+        </div>
+        <div id="chat-box">
+            <div id="group-chat-container" style="display: none;">
+                <h3 id="group-name"></h3>
+                <ul id="group-messages"></ul>
+                <input type="text" id="group-message" placeholder="Type a message to the group">
+                <button id="send-group">Send to Group</button>
+                <button id="Leave-group">Leave Group</button>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

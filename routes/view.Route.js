@@ -6,5 +6,16 @@ const router = express.Router();
 router.get('/register', authController.renderRegisterPage);
 router.get('/login', authController.renderLoginPage);
 
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Error logging out');
+        }
+        res.clearCookie('connect.sid'); // Clear the session cookie
+        res.redirect('/login'); // Redirect to the login page after logout
+    });
+});
+
+
 
 module.exports = router;

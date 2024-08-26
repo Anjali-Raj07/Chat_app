@@ -6,18 +6,42 @@ body {
     color: #333;
 }
 
-
-h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
-    font-size: 2em;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #105c5d;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
 
+header nav button {
+    background-color: white;
+    color: #105c5d;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+header nav button:hover {
+    background-color: #f9f9f9;
+}
+a{
+    text-decoration: none;
+    color: #105c5d;
+}
 #dashboard {
     position: fixed;
-    top: 20px;
+    top: 79px;
     left: 20px;
     width: 250px;
     padding: 15px;
@@ -32,7 +56,7 @@ h1 {
     width: 100%;
     padding: 10px;
     border: none;
-    background-color: #4caf50;
+    background-color: #105c5d;
     color: white;
     font-size: 16px;
     border-radius: 5px;
@@ -42,7 +66,7 @@ h1 {
 }
 
 #dashboard button:hover {
-    background-color: #45a049;
+    background-color: #0e4f52;
 }
 
 #online-users {
@@ -51,7 +75,7 @@ h1 {
 
 #online-users h2 {
     margin: 0 0 10px 0;
-    color: #4caf50;
+    color: #105c5d;
 }
 
 #online-users ul {
@@ -66,20 +90,19 @@ h1 {
 }
 
 #online-users .online {
-    color: #4caf50;
+    color: #105c5d;
 }
 
 #online-users .offline {
     color: #9e9e9e;
 }
 
-
 #chat-container {
-    margin-left: 300px; /* Space for the fixed dashboard */
+    margin-left: 302px; /* Adjusted for the fixed dashboard */
     padding: 20px;
-    max-width: 800px;
-    margin-top: 20px;
-    background-color: #ffffff;
+    max-width: calc(100% - 290px); /* Maximize to screen width minus dashboard */
+    margin-top: 15px;
+    background-color: #dae4e5;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -104,7 +127,7 @@ h1 {
 }
 
 #chat-container button {
-    background-color: #4caf50;
+    background-color: #105c5d;
     color: white;
     border: none;
     cursor: pointer;
@@ -112,7 +135,7 @@ h1 {
 }
 
 #chat-container button:hover {
-    background-color: #45a049;
+    background-color: #0e4f52;
 }
 
 #chat-box {
@@ -135,47 +158,51 @@ h1 {
 
 #chat-box .message .sender {
     font-weight: bold;
-    color: #48ad8b;
+    color: #105c5d;
 }
 
 #chat-box .message .text {
     margin-left: 10px;
     color: #333;
 }
+
 .signUp_page label {
-    color: #0e4601;
+    color: #0d1212;
     font-size: 13px;
     display: flex;
     align-items: start;
     font-weight: 500;
-    }
-    .signUp_page p{
-      font-size: 200;
-      font-weight: 400;
-      display: flex ;
-      flex-direction: column;
-      margin-left: 32px;
-    }
-    .signUp_page p a{
-        font-size: 16px;
-      }
-      
+}
+
+.signUp_page p {
+    font-size: 200;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+}
+
+.signUp_page p a {
+    font-size: 16px;
+}
+
 .signUp_page {
     border-radius: 2px;
     border-color: #333;
     display: flex;
     justify-content: center;
-  }
-  .signUp_page {
+}
+
+.signUp_page {
     width: 360px;
     padding: 2% 0 0;
     margin: auto;
-  }
-  .signUp_page a{
+}
+
+.signUp_page a {
     padding-bottom: 25px;
-  
-  }
-  .form {
+}
+
+.form {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -184,10 +211,9 @@ h1 {
     padding: 20px 50px 20px 50px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  }
-  
+}
+
 .form input {
-    /* font-family: "Roboto", sans-serif; */
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -196,42 +222,40 @@ h1 {
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
-  }
-  
-  .form button {
-   
+}
+
+.form button {
     outline: 0;
-    background: #4CAF50;
+    background: #105c5d;
     width: 100%;
     border: 0;
     padding: 15px;
     color: #FFFFFF;
     font-size: 14px;
-    /* -webkit-transition: all 0.3 ease; */
-    /* transition: all 0.3 ease; */
     cursor: pointer;
-  }
-  
-  .form button:hover,
-  .form button:active,
-  .form button:focus {
-    background: #43A047;
-  }
-  
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #0e4f52;
+}
+
 .form .message {
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
-  }
-  
-  .form .message a {
-    color: #4CAF50;
+}
+
+.form .message a {
+    color: #105c5d;
     text-decoration: none;
-  }
-  
-  .form .register-form {
+}
+
+.form .register-form {
     display: none;
-  }
-  #group-chat-container{
+}
+
+#group-chat-container {
     display: block;
-  }
+}

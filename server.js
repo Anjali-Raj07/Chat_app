@@ -5,14 +5,14 @@ const http = require('http');
 const socketIo = require('socket.io');
 const session = require('express-session');
 const User = require('./models/userModel');
-const authRoutes = require('./routes/auth.Route');
+const authRoutes = require('./routes/user.Route');
 const chatRoutes = require('./routes/chat.Route');
 const viewRoutes = require('./routes/view.Route');
 const Group = require('./models/groupModel');
 const Message = require('./models/messageModel')
 
 const connectDB = require('./config/dbConnection');
-const { authenticateUser } = require('./services/authService');
+const { authenticateUser } = require('./services/userService');
 
 
 connectDB();

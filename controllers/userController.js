@@ -1,5 +1,5 @@
 
-const authService = require('../services/authService');
+const authService = require('../services/userService');
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -21,13 +21,12 @@ const loginUser = async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.status(400).json({ message: "All fields are mandatory!" });
-        // throw new Error("All fields are mandatory!");
+      
     }
 
     try {
         const user = await authService.authenticateUser(username, password);
         if (user) {
-            console.log(user ,'user neeedd');
             user.online = true;
            await user.save();
             

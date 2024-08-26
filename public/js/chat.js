@@ -4,26 +4,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const groupChatContainer = document.getElementById('group-chat-container');
     const groupNameElement = document.getElementById('group-name');
     const groupMessages = document.getElementById('group-messages');
+    const receiverInfo = document.getElementById('receiver-info'); // New element for displaying receiver info
+    let receiver = '';
 
     function loginUser(username) {
         socket.emit('user login', username);
-    };
+    }
     loginUser(userId);
+
+    function updateReceiverInfo(selectedReceiver) {
+        receiver = selectedReceiver;
+        receiverInfo.textContent = `Sending messages to: ${receiver}`; // Update receiver info
+        receiverInfo.style.display = receiver ? 'block' : 'none'; // Show only when a receiver is selected
+    }
 
     document.getElementById('send').addEventListener('click', () => {
         const message = document.getElementById('message').value;
-        const receiver = document.getElementById('receiver').value;
 
         if (receiver) {
             socket.emit('chat message', { sender: userId, receiver, message });
-
 
             const li = document.createElement('li');
             li.textContent = `Me: ${message}`;
             document.getElementById('messages').appendChild(li);
             document.getElementById('message').value = '';
         } else {
-            Swal.fire('Error', 'Please select a receiver or enter a group name.', 'error');
+            Swal.fire('Error', 'Please select a receiver.', 'error');
         }
     });
 
@@ -40,7 +46,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 socket.emit('createGroup', groupName);
                 document.getElementById('group-name').textContent = groupName;
                 groupChatContainer.style.display = 'block';
-
             }
         });
     });
@@ -76,29 +81,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     socket.on('chat message', (data) => {
         const { sender, receiver, message } = data;
         const li = document.createElement('li');
-        if (sender === userId) {
-            li.textContent = `Me: ${message}`;
-        } else {
-            li.textContent = `${sender}: ${message}`;
-        }
+        li.textContent = sender === userId ? `Me: ${message}` : `${sender}: ${message}`;
         document.getElementById('messages').appendChild(li);
     });
 
     socket.on('group message', (data) => {
-        console.log(data);
-
         const li = document.createElement('li');
         li.textContent = `${data.sender}: ${data.content}`;
-        document.getElementById('group-messages').appendChild(li);
+        groupMessages.appendChild(li);
     });
 
-
-
-    document.getElementById('Leave-group').addEventListener('click', () => {
+    document.getElementById('leave-group').addEventListener('click', () => {
         const groupName = document.getElementById('group-name').textContent;
         if (groupName) {
             Swal.fire({
-                title: 'Do you want to leave this group',
+                title: 'Do you want to leave this group?',
                 showCancelButton: true,
                 confirmButtonText: 'OK',
                 cancelButtonText: 'Cancel'
@@ -107,18 +104,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     socket.emit('leaveGroup', groupName);
 
                     document.getElementById('group-name').textContent = '';
-                    document.getElementById('group-messages').innerHTML = '';
+                    groupMessages.innerHTML = '';
                     groupChatContainer.style.display = 'none';
-                } else if (result.isDismissed) {
-
                 }
             });
         } else {
             Swal.fire('Error', 'You are not in any group.', 'error');
         }
     });
-
-
 
     document.getElementById('logout').addEventListener('click', () => {
         window.location.href = '/logout';
@@ -129,8 +122,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         messageElement.textContent = message;
         messageElement.classList.add('message');
 
-
-        const chatContainer = document.getElementById('group-chat-container');
+        const chatContainer = document.getElementById('chat-box');
         chatContainer.appendChild(messageElement);
     }
 
@@ -138,4 +130,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         displayMessage(message);
     });
 
+    // Add click event to online users to set receiver and update display
+    document.getElementById('online-users').addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const selectedReceiver = event.target.getAttribute('data-username');
+            updateReceiverInfo(selectedReceiver);
+        }
+    });
+
+    // Ensure receiverInfo is present in HTML
+    // Example HTML element for receiverInfo
+    // <div id="receiver-info" style="display: none;">Sending messages to: </div>
 });

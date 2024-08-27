@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const groupChatContainer = document.getElementById('group-chat-container');
     const groupNameElement = document.getElementById('group-name');
     const groupMessages = document.getElementById('group-messages');
-    const receiverInfo = document.getElementById('receiver-info'); // New element for displaying receiver info
+    const receiverInfo = document.getElementById('receiver-info'); 
     let receiver = '';
 
     function loginUser(username) {
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function updateReceiverInfo(selectedReceiver) {
         receiver = selectedReceiver;
-        receiverInfo.textContent = `Sending messages to: ${receiver}`; // Update receiver info
-        receiverInfo.style.display = receiver ? 'block' : 'none'; // Show only when a receiver is selected
+        receiverInfo.textContent = `Sending messages to: ${receiver}`; 
+        receiverInfo.style.display = receiver ? 'block' : 'none'; 
     }
 
     document.getElementById('send').addEventListener('click', () => {
@@ -138,7 +138,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    // Ensure receiverInfo is present in HTML
-    // Example HTML element for receiverInfo
-    // <div id="receiver-info" style="display: none;">Sending messages to: </div>
+    
 });

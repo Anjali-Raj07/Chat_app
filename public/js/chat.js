@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     loginUser(userId);
 
-    function receiverInfo(selectedReceiver) {
+    function updateReceiverInfo(selectedReceiver) {
         receiver = selectedReceiver;
         receiverInfo.textContent = `Sending messages to: ${receiver}`; 
         receiverInfo.style.display = receiver ? 'block' : 'none'; 
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('online-users').addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const selectedReceiver = event.target.getAttribute('data-username');
-            receiverInfo(selectedReceiver);
+            updateReceiverInfo(selectedReceiver);
         }
     });
 

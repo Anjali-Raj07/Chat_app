@@ -12,7 +12,7 @@ router.get('/logout', (req, res) => {
             return res.status(500).send('Error logging out');
         }
         res.clearCookie('connect.sid'); // Clear the session cookie
-        res.redirect('/login'); // Redirect to the login page after logout
+        res.redirect('/login'); 
     });
 });
 

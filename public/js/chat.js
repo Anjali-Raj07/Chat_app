@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         displayMessage(message);
     });
 
-    // Add click event to online users to set receiver and update display
+
     document.getElementById('online-users').addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const selectedReceiver = event.target.getAttribute('data-username');
